@@ -1,0 +1,33 @@
+#  Testiranje kalkulator aplikacije (Black Box + Jedinični test)
+
+##  LOC: 146 linija
+
+---
+
+##  Black Box Testiranje
+
+| Test # | Ulazni izraz     | Očekivani rezultat | Stvarni rezultat | Status | Napomena |
+|--------|------------------|---------------------|-------------------|--------|----------|
+| 1      | `4+5`            | `9.0`               | `9.0`             | ✅      | Radi ispravno |
+| 2      | `4+5*2`          | `14.0`              | `14.0`            | ✅      | Prioritet operacija ispravan |
+| 3      | `10/2+3`         | `8.0`               | `8.0`             | ✅      | Kombinacija deljenja i sabiranja |
+| 4      | `10/0`           | `Infinity`          | `Infinity`        | ⚠️      | Trebalo bi prikazati "grešku deljenja sa nulom" |
+| 5      | `abc+5`          | `ERROR`             | `ERROR`           | ✅      | Loš unos karaktera |
+| 6      | `+4+5`           | `9.0`               | `9.0`             | ✅      | Početak sa operatorom |
+| 7      | `4+-5`           | `-1.0`              | `-1.0`            | ✅      | Kombinovani znaci |
+| 8      | `4*/5`           | `ERROR`             | `ERROR`           | ✅      | Nevalidan izraz |
+| 9      | `4+5+`           | `ERROR`             | `ERROR`           | ✅      | Završen operatorom |
+| 10     | `Infinity+1`     | `Infinity`          | `Infinity`        | ✅      | Edge case |
+| 11     | `-Infinity+1`    | `-Infinity`         | `-Infinity`       | ✅      | Edge case |
+| 12     | `5-2*2+1`        | `2.0`               | `2.0`             | ✅      | Kombinacija svih operatora |
+
+---
+
+##  Jedinični test
+
+```java
+@Test
+public void testCalculateSimpleAddition() {
+    assertEquals(9.0f, Float.parseFloat(Calculator.Run("4+5")), 0.001f);
+}
+ 
